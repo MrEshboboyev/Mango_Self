@@ -66,5 +66,28 @@ namespace Mango.Services.CouponAPI.Controllers
             }
             return _response;
         }
+
+        // get by code of coupon 
+        [HttpGet]
+        [Route("GetByCode/{code}")]
+        public ResponseDto? Get(string code)
+        {
+            try
+            {
+                Coupon coupon = _db.Coupons.FirstOrDefault(c => c.CouponCode.ToLower() == code.ToLower());
+                if (coupon != null) _response.Result = _mapper.Map<CouponDto>(coupon);
+                else
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Not found!";
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.Message = ex.Message;
+                _response.IsSuccess = false;
+            }
+            return _response;
+        }
     }
 }
