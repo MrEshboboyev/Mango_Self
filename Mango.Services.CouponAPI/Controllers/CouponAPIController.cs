@@ -4,6 +4,7 @@ using Mango.Services.CouponAPI.Models;
 using Mango.Services.CouponAPI.Models.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.NetworkInformation;
 
 namespace Mango.Services.CouponAPI.Controllers
 {
@@ -86,6 +87,26 @@ namespace Mango.Services.CouponAPI.Controllers
             {
                 _response.Message = ex.Message;
                 _response.IsSuccess = false;
+            }
+            return _response;
+        }
+
+        // creating entity
+        [HttpPost]
+        public ResponseDto? Post([FromBody] CouponDto couponDto)
+        {
+            try
+            {
+                Coupon coupon = _mapper.Map<Coupon>(couponDto);
+                _db.Coupons.Add(coupon);
+                _db.SaveChanges();
+
+                _response.Result = _mapper.Map<CouponDto>(coupon);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
             }
             return _response;
         }
