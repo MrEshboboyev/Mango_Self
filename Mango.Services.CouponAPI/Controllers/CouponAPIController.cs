@@ -22,23 +22,46 @@ namespace Mango.Services.CouponAPI.Controllers
 
         // get all entities
         [HttpGet]
-        public IEnumerable<Coupon> Get()
+        public ResponseDto? Get()
         {
-            IEnumerable<Coupon> objList = _db.Coupons.ToList();
-            return objList;
+            try
+            {
+                IEnumerable<Coupon> objList = _db.Coupons.ToList();
+                _response.Result = objList;
+            }
+            catch(Exception ex)
+            {
+                _response.Message = ex.Message;
+                _response.IsSuccess = false;
+            }
+            return _response;
         }
 
         // get entity by id 
         [HttpGet]
         [Route("{id:int}")]
-        public Coupon Get(int id)
+        public ResponseDto? Get(int id)
         {
-            Coupon obj = _db.Coupons.FirstOrDefault(c => c.CouponId == id);
-            if(obj == null)
+
+            try
             {
-                return new Coupon();
+                Coupon coupon = _db.Coupons.FirstOrDefault(c => c.CouponId == id);
+                if (coupon != null)
+                {
+                    _response.Result = coupon;
+                }
+                else
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Not Found!";
+                }
             }
-            return obj;
+            catch (Exception ex)
+            {
+                _response.Message = ex.Message;
+                _response.IsSuccess = false;
+            }
+            return _response;
         }
     }
 }
