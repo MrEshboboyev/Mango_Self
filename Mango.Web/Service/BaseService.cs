@@ -5,9 +5,16 @@ namespace Mango.Web.Service
 {
     public class BaseService : IBaseService
     {
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public BaseService(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
+
         public Task<ResponseDto?> SendAsync(RequestDto requestDto)
         {
-            throw new NotImplementedException();
+            HttpClient client = _httpClientFactory.CreateClient("MangoAPI");
         }
     }
 }
