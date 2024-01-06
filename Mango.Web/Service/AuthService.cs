@@ -1,6 +1,8 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Models.Dto;
 using Mango.Web.Service.IService;
+using Mango.Web.Utility;
+using static Mango.Web.Utility.SD;
 
 namespace Mango.Web.Service
 {
@@ -13,19 +15,34 @@ namespace Mango.Web.Service
             _baseService = baseService;
         }
 
-        public Task<ResponseDto> AssignRoleAsync(RegistrationRequestDto registrationRequestDto)
+        public async Task<ResponseDto?> AssignRoleAsync(RegistrationRequestDto registrationRequestDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = ApiType.POST,
+                Data = registrationRequestDto,
+                Url = SD.AuthAPIBase + "/api/auth/assignRole"
+            });
         }
 
-        public Task<ResponseDto> LoginAsync(LoginRequestDto loginRequestDto)
+        public async Task<ResponseDto?> LoginAsync(LoginRequestDto loginRequestDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = ApiType.POST,
+                Data = loginRequestDto,
+                Url = SD.AuthAPIBase + "/api/auth/login"
+            });
         }
 
-        public Task<ResponseDto> RegisterAsync(RegistrationRequestDto registrationRequestDto)
+        public async Task<ResponseDto?> RegisterAsync(RegistrationRequestDto registrationRequestDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = ApiType.POST,
+                Data = registrationRequestDto,
+                Url = SD.AuthAPIBase + "/api/auth/register"
+            });
         }
     }
 }
