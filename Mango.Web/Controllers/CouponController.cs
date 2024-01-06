@@ -1,6 +1,7 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Service.IService;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Mango.Web.Controllers
 {
@@ -15,8 +16,13 @@ namespace Mango.Web.Controllers
 
         public async Task<IActionResult> CouponIndex()
         {
-            ResponseDto? objList =  await _couponService.GetAllCouponsAsync();
-            return View();
+            List<CouponDto> list = new();
+            ResponseDto? response = await _couponService.GetAllCouponsAsync();
+            if (response != null && response.IsSuccess)
+            {
+                list = JsonConvert.DeserializeObject<List<CouponDto>>(Convert.ToString(response.Result));
+            }
+            return View(list);
         }
     }
 }
