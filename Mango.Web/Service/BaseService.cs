@@ -1,6 +1,7 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Service.IService;
 using Newtonsoft.Json;
+using System.Net;
 using System.Text;
 using static Mango.Web.Utility.SD;
 
@@ -50,6 +51,22 @@ namespace Mango.Web.Service
             }
 
             apiResponse = await client.SendAsync(message);
+
+            switch(apiResponse.StatusCode)
+            {
+                case HttpStatusCode.NotFound:
+                    return new ResponseDto { IsSuccess = false, Message = "Not Found" };
+                case HttpStatusCode.Forbidden:
+                    return new ResponseDto { IsSuccess = false, Message = "Access Denied" };
+                case HttpStatusCode.Unauthorized:
+                    return new ResponseDto { IsSuccess = false, Message = "UnAuthorized" };
+                case HttpStatusCode.InternalServerError:
+                    return new ResponseDto { IsSuccess = false, Message = "Internal Server Error" };
+                default:
+                    var apiContent = await apiResponse.Content.ReadAsStringAsync();
+                    var apiResponseDto = JsonConvert.DeserializeObject<ResponseDto>(apiContent);
+                    return apiResponseDto;
+            }
         }
     }
 }
