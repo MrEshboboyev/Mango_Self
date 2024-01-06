@@ -1,8 +1,9 @@
 ﻿using Mango.Web.Models;
+using Mango.Web.Service.IService;
 using Mango.Web.Utility;
 using static Mango.Web.Utility.SD;
 
-namespace Mango.Web.Service.IService
+namespace Mango.Web.Service
 {
     public class CouponService : ICouponService
     {
@@ -19,7 +20,7 @@ namespace Mango.Web.Service.IService
             {
                 ApiType = ApiType.POST,
                 Data = couponDto,
-                Url = SD.CouponAPIBase + "api/coupon"
+                Url = CouponAPIBase + "/api/coupon"
             });
         }
 
@@ -28,7 +29,7 @@ namespace Mango.Web.Service.IService
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.DELETE,
-                Url = SD.CouponAPIBase + "api/coupon/" + id
+                Url = CouponAPIBase + "/api/coupon/" + id
             });
         }
 
@@ -37,7 +38,7 @@ namespace Mango.Web.Service.IService
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.GET,
-                Url = SD.CouponAPIBase + "api/coupon"
+                Url = CouponAPIBase + "/api/coupon"
             });
         }
 
@@ -46,7 +47,7 @@ namespace Mango.Web.Service.IService
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.GET,
-                Url = SD.CouponAPIBase + "api/coupon"
+                Url = CouponAPIBase + "/api/coupon"
             });
         }
 
@@ -55,7 +56,7 @@ namespace Mango.Web.Service.IService
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.GET,
-                Url = SD.CouponAPIBase + "api/coupon" + id
+                Url = CouponAPIBase + "/api/coupon" + id
             });
         }
 
@@ -65,7 +66,7 @@ namespace Mango.Web.Service.IService
             {
                 ApiType = ApiType.PUT,
                 Data = couponDto,
-                Url = SD.CouponAPIBase + "api/coupon"
+                Url = CouponAPIBase + "/api/coupon"
             });
         }
     }
