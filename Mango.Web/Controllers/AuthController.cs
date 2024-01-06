@@ -20,8 +20,14 @@ namespace Mango.Web.Controllers
             return View(loginRequestDto);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Register()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
         {
             return View();
         }
