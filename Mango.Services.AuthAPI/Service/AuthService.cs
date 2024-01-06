@@ -28,7 +28,14 @@ namespace Mango.Services.AuthAPI.Service
 
         public Task<UserDto> Register(RegistrationRequestDto registrationRequestDto)
         {
-            throw new NotImplementedException();
+            ApplicationUser user = new()
+            {
+                UserName = registrationRequestDto.Email,
+                Email = registrationRequestDto.Email,
+                NormalizedEmail = registrationRequestDto.Email.ToUpper(),
+                Name = registrationRequestDto.Name,
+                PhoneNumber = registrationRequestDto.PhoneNumber,
+            };
         }
     }
 }
