@@ -19,6 +19,8 @@ namespace Mango.Web.Service
             HttpRequestMessage message = new();
 
             message.Headers.Add("Accept", "application/json");
+
+            message.RequestUri = new Uri(requestDto.Url);
         }
     }
 }
