@@ -39,6 +39,8 @@ namespace Mango.Services.AuthAPI.Service
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), 
                 SecurityAlgorithms.HmacSha256Signature)
             };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
         }
     }
 }
