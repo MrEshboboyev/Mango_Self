@@ -143,7 +143,7 @@ namespace Mango.Services.CouponAPI.Controllers
 
         // deleting entity
         [HttpDelete]
-        public ResponseDto? Delete(int id)
+        public ResponseDto? Delete([FromBody] int id)
         {
             try
             {

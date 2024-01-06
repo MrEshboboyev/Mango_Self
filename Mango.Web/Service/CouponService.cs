@@ -29,7 +29,8 @@ namespace Mango.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.DELETE,
-                Url = CouponAPIBase + "/api/coupon/" + id
+                Data = id,
+                Url = CouponAPIBase + "/api/coupon/"
             });
         }
 
