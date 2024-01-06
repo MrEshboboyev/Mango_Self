@@ -30,7 +30,7 @@ namespace Mango.Web.Controllers
                 new SelectListItem { Text = SD.RoleAdmin , Value = SD.RoleAdmin},
                 new SelectListItem { Text = SD.RoleCustomer, Value = SD.RoleCustomer}
             };
-            ViewData["roleList"] = roleList;
+            ViewBag.roleList = roleList;
             return View();
         }
 
