@@ -4,6 +4,13 @@ namespace Mango.Web.Service.IService
 {
     public class CouponService : ICouponService
     {
+        private readonly IBaseService _baseService;
+
+        public CouponService(IBaseService baseService)
+        {
+            _baseService = baseService;
+        }
+
         public Task<ResponseDto?> CreateCouponAsync(CouponDto couponDto)
         {
             throw new NotImplementedException();
