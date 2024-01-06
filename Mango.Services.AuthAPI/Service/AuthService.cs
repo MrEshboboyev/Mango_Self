@@ -32,6 +32,24 @@ namespace Mango.Services.AuthAPI.Service
             {
                 return new LoginResponseDto() { User = null, Token = "" };
             }
+
+            // if user was found, generate JWT token
+
+            UserDto userDto = new()
+            {
+                Email = user.Email,
+                Name = user.Name,
+                Id = user.Id,
+                PhoneNumber = user.PhoneNumber
+            };
+
+            LoginResponseDto? loginResponseDto = new LoginResponseDto() 
+            { 
+                User = userDto, 
+                Token = "" 
+            };
+
+            return loginResponseDto;
         }
 
         public async Task<string> Register(RegistrationRequestDto registrationRequestDto)
