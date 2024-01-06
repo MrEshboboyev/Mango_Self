@@ -21,6 +21,8 @@ builder.Services.AddScoped<ICouponService, CouponService>();
 
 // CouponAPIBase populated
 SD.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
+// CouponAPIBase populated
+SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 
 var app = builder.Build();
 
