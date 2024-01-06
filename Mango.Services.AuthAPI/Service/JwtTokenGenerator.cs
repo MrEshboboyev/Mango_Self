@@ -41,6 +41,8 @@ namespace Mango.Services.AuthAPI.Service
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
     }
 }
