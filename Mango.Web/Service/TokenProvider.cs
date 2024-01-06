@@ -1,4 +1,6 @@
 ﻿using Mango.Web.Service.IService;
+using Mango.Web.Utility;
+using Newtonsoft.Json.Linq;
 
 namespace Mango.Web.Service
 {
@@ -14,7 +16,7 @@ namespace Mango.Web.Service
 
         public void ClearToken()
         {
-            throw new NotImplementedException();
+            _contextAccessor.HttpContext.Response.Cookies.Delete(SD.TokenCookie);
         }
 
         public string? GetToken()
@@ -24,7 +26,7 @@ namespace Mango.Web.Service
 
         public void SetToken(string token)
         {
-            throw new NotImplementedException();
+            _contextAccessor.HttpContext.Response.Cookies.Append(SD.TokenCookie, token);
         }
     }
 }
