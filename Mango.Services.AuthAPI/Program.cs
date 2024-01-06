@@ -22,6 +22,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFramework
 
 // lifetime configure for AuthService
 builder.Services.AddScoped<IAuthService, AuthService>();
+// lifetime configure for JwtTokenGenerator
+builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 // configure Jwt options
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
