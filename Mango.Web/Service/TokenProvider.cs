@@ -21,7 +21,11 @@ namespace Mango.Web.Service
 
         public string? GetToken()
         {
-            throw new NotImplementedException();
+            string token = null;
+            bool? hasToken = _contextAccessor.HttpContext.Request.Cookies.TryGetValue(SD.TokenCookie,
+                out token);
+
+            return hasToken is true ? token : "";
         }
 
         public void SetToken(string token)
