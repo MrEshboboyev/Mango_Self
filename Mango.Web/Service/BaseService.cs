@@ -1,5 +1,7 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Service.IService;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace Mango.Web.Service
 {
@@ -21,6 +23,14 @@ namespace Mango.Web.Service
             message.Headers.Add("Accept", "application/json");
 
             message.RequestUri = new Uri(requestDto.Url);
+
+            if(requestDto.Data != null)
+            {
+                message.Content = new StringContent(JsonConvert.SerializeObject(requestDto.Data),
+                    Encoding.UTF8, "application/json");
+
+
+            }
         }
     }
 }
