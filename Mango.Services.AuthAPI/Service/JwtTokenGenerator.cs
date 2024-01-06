@@ -1,6 +1,7 @@
 ﻿using Mango.Services.AuthAPI.Models;
 using Mango.Services.AuthAPI.Models.Dto;
 using Mango.Services.AuthAPI.Service.IService;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Mango.Services.AuthAPI.Service
 {
@@ -15,7 +16,7 @@ namespace Mango.Services.AuthAPI.Service
 
         public string GenerateToken(ApplicationUser applicationUser)
         {
-            throw new NotImplementedException();
+            var tokenHandler = new JwtSecurityTokenHandler();
         }
     }
 }
