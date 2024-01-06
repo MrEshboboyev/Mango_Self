@@ -17,10 +17,11 @@ builder.Services.AddHttpClient<ICouponService, CouponService>();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 
 
-// service lifetime for IBaseService, ICouponService, IAuthService
+// service lifetime for IBaseService, ICouponService, IAuthService, ITokenProvider
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 
 // CouponAPIBase populated
 SD.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
