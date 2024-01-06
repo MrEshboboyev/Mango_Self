@@ -28,9 +28,9 @@ namespace Mango.Web.Service
             {
                 message.Content = new StringContent(JsonConvert.SerializeObject(requestDto.Data),
                     Encoding.UTF8, "application/json");
-
-
             }
+
+            HttpResponseMessage? apiResponse = null;
         }
     }
 }
