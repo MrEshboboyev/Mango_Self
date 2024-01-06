@@ -37,6 +37,7 @@ namespace Mango.Services.AuthAPI.Service
             }
 
             // if user was found, generate JWT token
+            var token = _jwtTokenGenerator.GenerateToken(user);
 
             UserDto userDto = new()
             {
@@ -49,7 +50,7 @@ namespace Mango.Services.AuthAPI.Service
             LoginResponseDto? loginResponseDto = new LoginResponseDto() 
             { 
                 User = userDto, 
-                Token = "" 
+                Token = token 
             };
 
             return loginResponseDto;
