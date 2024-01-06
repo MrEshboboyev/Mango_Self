@@ -1,4 +1,5 @@
-﻿using Mango.Web.Service.IService;
+﻿using Mango.Web.Models.Dto;
+using Mango.Web.Service.IService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mango.Web.Controllers
@@ -12,8 +13,15 @@ namespace Mango.Web.Controllers
             _authService = authService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Login()
+        {
+            LoginRequestDto loginRequestDto = new();
+            return View(loginRequestDto);
+        }
 
-        public IActionResult Index()
+        [HttpPost]
+        public async Task<IActionResult> Register()
         {
             return View();
         }
