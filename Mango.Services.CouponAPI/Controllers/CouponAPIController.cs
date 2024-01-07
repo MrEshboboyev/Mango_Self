@@ -96,6 +96,7 @@ namespace Mango.Services.CouponAPI.Controllers
 
         // creating entity
         [HttpPost]
+        [Authorize(Roles = "ADMIN")]
         public ResponseDto? Post([FromBody] CouponDto couponDto)
         {
             try
@@ -116,6 +117,7 @@ namespace Mango.Services.CouponAPI.Controllers
 
         // updating entity
         [HttpPut]
+        [Authorize(Roles = "ADMIN")]
         public ResponseDto? Put([FromBody] CouponDto couponDto)
         {
             try
@@ -145,6 +147,7 @@ namespace Mango.Services.CouponAPI.Controllers
 
         // deleting entity
         [HttpDelete]
+        [Authorize(Roles = "ADMIN")]
         public ResponseDto? Delete([FromBody] int id)
         {
             try
