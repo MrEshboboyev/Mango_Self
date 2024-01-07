@@ -16,18 +16,23 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient<ICouponService, CouponService>();
 // for authService
 builder.Services.AddHttpClient<IAuthService, AuthService>();
+// for productService
+builder.Services.AddHttpClient<IProductService, ProductService>();
 
 
-// service lifetime for IBaseService, ICouponService, IAuthService, ITokenProvider
+// service lifetime for IBaseService, ICouponService, IAuthService, ITokenProvider, IProductService
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 // CouponAPIBase populated
 SD.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
-// CouponAPIBase populated
+// AuthAPIBase populated
 SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
+// ProductAPIBase populated
+SD.AuthAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 
 
 // add authentication
