@@ -32,7 +32,7 @@ SD.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
 // AuthAPIBase populated
 SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 // ProductAPIBase populated
-SD.AuthAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
+SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 
 
 // add authentication
