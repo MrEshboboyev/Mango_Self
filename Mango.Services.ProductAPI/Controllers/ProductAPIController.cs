@@ -73,6 +73,7 @@ namespace Mango.Services.ProductAPI.Controllers
 
         // creating entity
         [HttpPost]
+        [Authorize(Roles = "ADMIN")]
         public ResponseDto? Post([FromBody] ProductDto productDto)
         {
             try
@@ -93,6 +94,7 @@ namespace Mango.Services.ProductAPI.Controllers
 
         // updating entity
         [HttpPut]
+        [Authorize(Roles = "ADMIN")]
         public ResponseDto? Put([FromBody] ProductDto productDto)
         {
             try
@@ -122,6 +124,7 @@ namespace Mango.Services.ProductAPI.Controllers
 
         // deleting entity
         [HttpDelete]
+        [Authorize(Roles = "ADMIN")]
         public ResponseDto? Delete([FromBody] int id)
         {
             try
