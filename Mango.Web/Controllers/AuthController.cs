@@ -38,6 +38,9 @@ namespace Mango.Web.Controllers
                 LoginResponseDto loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>
                 (Convert.ToString(responseDto.Result));
 
+                // sign in user applied
+                await SignInUser(loginResponseDto);
+
                 // set token
                 _tokenProvider.SetToken(loginResponseDto.Token);
 
