@@ -28,6 +28,13 @@ namespace Mango.Web.Service
 
                 message.Headers.Add("Accept", "application/json");
 
+                // token
+                if(withBearer)
+                {
+                    var token = _tokenProvider.GetToken();
+                    message.Headers.Add("Authorization", $"Bearer {token}");
+                }
+
                 message.RequestUri = new Uri(requestDto.Url);
 
                 if (requestDto.Data != null)
