@@ -25,13 +25,19 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 builder.Services.AddHttpClient("Product", u => u.BaseAddress = 
 new Uri(builder.Configuration["ServiceUrls:ProductAPI"]));
 
+// add HttpClient fo connecting Coupon and shopping cart
+builder.Services.AddHttpClient("Coupon", u => u.BaseAddress = 
+new Uri(builder.Configuration["ServiceUrls:CouponAPI"]));
+
 // add and registering Mapper
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-// adding life scoped 
+// adding lifetime 
 builder.Services.AddScoped<IProductService, ProductService>();
+// adding lifetime 
+builder.Services.AddScoped<ICouponService, CouponService>();
 
 
 builder.Services.AddControllers();

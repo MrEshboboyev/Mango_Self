@@ -166,6 +166,8 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
                 cartFromDb.CouponCode = cartDto.CartHeader.CouponCode;
                 _db.CartHeaders.Update(cartFromDb);
                 await _db.SaveChangesAsync();
+
+                _response.Result = true;
             }
             catch (Exception ex)
             {
@@ -187,6 +189,8 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
                 cartHeaderFromDb.CouponCode = "";
                 _db.CartHeaders.Update(cartHeaderFromDb);
                 await _db.SaveChangesAsync();
+
+                _response.Result = true;
             }
             catch (Exception ex)
             {
