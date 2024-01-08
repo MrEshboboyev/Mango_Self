@@ -143,6 +143,8 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
                     item.Product = products.FirstOrDefault(p => p.ProductId == item.ProductId);
                     cart.CartHeader.CartTotal += (item.Product.Price * item.Count);
                 }
+
+                _response.Result = cart;
             }
             catch (Exception ex)
             {
