@@ -34,6 +34,14 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
                 if (cartHeaderFromDb == null)
                 {
                     // create cart header and cart details
+                    CartHeader cartHeader = _mapper.Map<CartHeader>(cartDto.CartHeader);
+                    _db.CartHeaders.Add(cartHeader);   
+                    await _db.SaveChangesAsync();
+
+                    // create cart details same as for cart header
+                    cartDto.CartDetails.First().CartHeaderId = cartHeader.CartHeaderId;
+                    _db.CartDetails.Add(_mapper.Map<CartDetails>(cartDto.CartDetails.First()));
+                    await _db.SaveChangesAsync();
                 }
                 else
                 {
