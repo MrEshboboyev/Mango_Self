@@ -4,6 +4,7 @@ using Mango.Services.ShoppingCartAPI.Models;
 using Mango.Services.ShoppingCartAPI.Models.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mango.Services.ShoppingCartAPI.Controllers
 {
@@ -27,7 +28,7 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
         {
             try
             {
-                var cartHeaderFromDb = _db.CartHeaders.FirstOrDefault(u => u.UserId == 
+                var cartHeaderFromDb = _db.CartHeaders.AsNoTracking().FirstOrDefault(u => u.UserId == 
                     cartDto.CartHeader.UserId);
 
                 // user cart header was not found 
@@ -47,7 +48,7 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
                 {
                     // if cart header is not null
                     // check if details has same product
-                    var cartDetailsFromDb = _db.CartDetails.FirstOrDefault(u => u.ProductId ==
+                    var cartDetailsFromDb = _db.CartDetails.AsNoTracking().FirstOrDefault(u => u.ProductId ==
                         cartDto.CartDetails.First().ProductId 
                         && u.CartHeaderId == cartHeaderFromDb.CartHeaderId);
 
@@ -62,9 +63,15 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
                     else
                     {
                         // updating cart details
+                        cartDto.CartDetails.First().Count += cartDetailsFromDb.Count;
+                        cartDto.CartDetails.First().CartDetailsId = cartDetailsFromDb.CartDetailsId;
+                        cartDto.CartDetails.First().CartHeaderId = cartDetailsFromDb.CartHeaderId;
+                        _db.CartDetails.Update(_mapper.Map<CartDetails>( cartDto.CartDetails.First()));
+                        await _db.SaveChangesAsync();
                     }
                 }
 
+                _response.Result = cartDto;
             }
             catch (Exception ex)
             {
