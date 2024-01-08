@@ -2,6 +2,7 @@ using AutoMapper;
 using Mango.Services.ProductAPI;
 using Mango.Services.ProductAPI.Data;
 using Mango.Services.ShoppingCartAPI.Extensions;
+using Mango.Services.ShoppingCartAPI.Service.IService;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,10 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+// add HttpClient fo connecting Product and shopping cart
+builder.Services.AddHttpClient("Product", u => u.BaseAddress = 
+new Uri(builder.Configuration["ServiceUrls:ProductAPI"]));
 
 // add and registering Mapper
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
