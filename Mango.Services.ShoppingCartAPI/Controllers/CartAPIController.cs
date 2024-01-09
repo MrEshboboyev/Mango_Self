@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Mango.MessageBus;
 using Mango.Services.ProductAPI.Data;
 using Mango.Services.ShoppingCartAPI.Models;
 using Mango.Services.ShoppingCartAPI.Models.Dto;
@@ -17,16 +18,19 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
         private readonly IMapper _mapper;
         private readonly IProductService _productService;
         private readonly ICouponService _couponService;
+        private readonly IMessageBus _messageBus;
         private ResponseDto _response;
 
         public CartAPIController(AppDbContext db, IMapper mapper, 
             IProductService productService, 
-            ICouponService couponService)
+            ICouponService couponService,
+            IMessageBus messageBus)
         {
             _db = db;
             _mapper = mapper;
             _couponService = couponService;
             _productService = productService;
+            _messageBus = messageBus;
             this._response = new ResponseDto();
         }
 
