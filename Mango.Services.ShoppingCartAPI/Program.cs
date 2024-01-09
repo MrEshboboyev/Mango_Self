@@ -4,6 +4,7 @@ using Mango.Services.ProductAPI.Data;
 using Mango.Services.ShoppingCartAPI.Extensions;
 using Mango.Services.ShoppingCartAPI.Service;
 using Mango.Services.ShoppingCartAPI.Service.IService;
+using Mango.Services.ShoppingCartAPI.Utility;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -21,13 +22,18 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// adding lifetime for BackendApiAuthenticationHttpClientHandler
+builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
+// adding service for HttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
 // add HttpClient fo connecting Product and shopping cart
 builder.Services.AddHttpClient("Product", u => u.BaseAddress = 
-new Uri(builder.Configuration["ServiceUrls:ProductAPI"]));
+new Uri(builder.Configuration["ServiceUrls:ProductAPI"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
 
 // add HttpClient fo connecting Coupon and shopping cart
 builder.Services.AddHttpClient("Coupon", u => u.BaseAddress = 
-new Uri(builder.Configuration["ServiceUrls:CouponAPI"]));
+new Uri(builder.Configuration["ServiceUrls:CouponAPI"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
 
 // add and registering Mapper
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
