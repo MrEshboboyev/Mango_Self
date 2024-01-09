@@ -1,9 +1,5 @@
 ﻿@model CartDto
 
-
-@if (Model.CartDetails.Any())
-{
-    
 <form method="post">
     <input asp-for="CartHeader.CartHeaderId" hidden/>
     <input asp-for="CartHeader.UserId" hidden/>
@@ -90,16 +86,10 @@
                     <button type="submit" class="btn btn-outline-danger form-control">Email Cart</button>
                 </div>
                 <div class="col-6 col-md-3 offset-md-6">
-                    <button disabled class="btn btn-success form-control " value="Checkout (Coming Soon!)" />
+                    <button disabled class="btn btn-success form-control " >Checkout (Coming Soon!)</button>>
                 </div>
             </div>
         </div>
     </div>
     </form>
-}
-else
-{
-    <p>
-        No product(s) in shopping cart
-    </p>
 }
