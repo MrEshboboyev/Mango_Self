@@ -1,4 +1,5 @@
 using AutoMapper;
+using Mango.MessageBus;
 using Mango.Services.ProductAPI;
 using Mango.Services.ProductAPI.Data;
 using Mango.Services.ShoppingCartAPI.Extensions;
@@ -44,6 +45,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IProductService, ProductService>();
 // adding lifetime 
 builder.Services.AddScoped<ICouponService, CouponService>();
+
+// adding message bus services
+builder.Services.AddScoped<IMessageBus, MessageBus>();
 
 
 builder.Services.AddControllers();
