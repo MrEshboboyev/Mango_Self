@@ -33,6 +33,12 @@ namespace Mango.Services.EmailAPI.Messaging
             _emailCartProcessor.ProcessErrorAsync += ErrorHandler;
         }
 
+        public async Task Stop()
+        {
+            await _emailCartProcessor.StopProcessingAsync();
+            await _emailCartProcessor.DisposeAsync();
+        }
+
         private async Task OnEmailCartRequestReceived(ProcessMessageEventArgs args)
         {
             // this is where you will receive message
@@ -56,11 +62,6 @@ namespace Mango.Services.EmailAPI.Messaging
         {
             Console.WriteLine(args.Exception.ToString());
             return Task.CompletedTask;
-        }
-
-        public Task Stop()
-        {
-            throw new NotImplementedException();
         }
     }
 }
