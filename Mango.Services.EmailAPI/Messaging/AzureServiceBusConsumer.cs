@@ -2,7 +2,7 @@
 
 namespace Mango.Services.EmailAPI.Messaging
 {
-    public class AzureServiceBusConsumer
+    public class AzureServiceBusConsumer : IAzureServiceBusConsumer
     {
         private readonly string serviceBusConnectionString;
         private readonly string emailCartQueue;
@@ -22,6 +22,16 @@ namespace Mango.Services.EmailAPI.Messaging
 
             var client = new ServiceBusClient(serviceBusConnectionString);
             _emailCartProcessor = client.CreateProcessor(emailCartQueue);
+        }
+
+        public Task Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Stop()
+        {
+            throw new NotImplementedException();
         }
     }
 }
