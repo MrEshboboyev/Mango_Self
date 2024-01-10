@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Mango.Services.EmailAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mango.Services.EmailAPI.Data
 {
@@ -8,6 +9,8 @@ namespace Mango.Services.EmailAPI.Data
         {
             
         }
+
+        public DbSet<EmailLogger> EmailLoggers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
